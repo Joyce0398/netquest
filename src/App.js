@@ -242,39 +242,23 @@ function Weather() {
                         <p>winddirection: {localStorage.getItem(key).split(',')[6]}</p>
                     </div>
                 ))}
-
-                {/*{Object.keys(dicStationData).map((key, i) => (*/}
-                {/*    //voor elke key luchtdruk sort*/}
-                {/*    const sortedList = []*/}
-                {/*    const airpressure= localStorage.getItem(key).split('')[3]*/}
-                {/*    <div className="topten" key={i}>*/}
-                {/*        */}
-                {/*    </div>*/}
-                {/*    ))}*/}
                     </PerfectScrollbar>
                 </div>
                 <div className="topten">
                     <PerfectScrollbar>
                 <h1>Top ten</h1>
                 <p>station level pressure</p>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
+                        {Object.keys(dicStationData).map((key, i) => (
+                            //voor elke key luchtdruk sort
+                            // const sortedList = []
+                            // const airpressure= localStorage.getItem(key).split('')[3]
+                            <div className="item" key={i}>
+                                {localStorage.getItem(key).split(',')[5]}
+                            </div>
+                        ))}
+                {/*<div className="item">*/}
+                {/*test : test*/}
+                {/*</div>*/}
                         </PerfectScrollbar>
                 </div>
 
@@ -282,24 +266,39 @@ function Weather() {
                     <PerfectScrollbar>
                 <h1>Top ten</h1>
                 <p>sea level pressure</p>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
-                <div className="item">
-                test : test
-                </div>
+                        {/*{Object.keys(dicStationData).sort().map((key, i) => (*/}
+                        {/*    <div className="item" key={i}>*/}
+                        {/*        /!*console.log(i)*!/*/}
+                        {/*        {localStorage.getItem(key).split(',')[6]}*/}
+                        {/*    </div>*/}
+                        {/*))}*/}
+
+                        {/*{ let sortable = []*/}
+                        {/*    for(let s in dicStationData) {*/}
+                        {/*        sortable.push([s, dicStationData[s]])*/}
+                        {/*}*/}
+                        {/*}*/}
+
+                        {/*Object.fromEntries(*/}
+                        {/*Object.entries(maxSpeed).sort(([,a],[,b]) => a-b)*/}
+                {/*<div className="item">*/}
+                {/*test : test*/}
+                {/*</div>*/}
+                {/*<div className="item">*/}
+                {/*test : test*/}
+                {/*</div>*/}
+                {/*<div className="item">*/}
+                {/*test : test*/}
+                {/*</div>*/}
+                {/*<div className="item">*/}
+                {/*test : test*/}
+                {/*</div>*/}
+                {/*<div className="item">*/}
+                {/*test : test*/}
+                {/*</div>*/}
+                {/*<div className="item">*/}
+                {/*test : test*/}
+                {/*</div>*/}
                         </PerfectScrollbar>
                 </div>
                 </div>
