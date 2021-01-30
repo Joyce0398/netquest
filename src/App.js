@@ -1,4 +1,6 @@
 import React, { Component, useState, setState, useEffect }  from 'react'
+// import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import ReactDOM from 'react-dom'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -89,42 +91,7 @@ function App() {
                 for(let key in dicStationData) {
                     console.log(localStorage.getItem(key))
                 }
-
-                // let newData = JSON.parse(data)
-                // for(let key in newData) {
-                //     dicStationData[key] = newData[key]
-                // }
-                // {Object.keys(dicStationData).map((key, i) => (
-                //     console.log(key, dicStationData[key]))
-                //
-                // )}
-                // let newData = JSON.parse(data)
-                // for(let key in newData) {
-                //     dicStationData[key] = newData[key]
-                // }
-                // {Object.keys(dicStationData).map((key, i) => (
-                //         console.log(key, dicStationData[key]))
-                //
-                // )}
-                // console.log(dicStationData)
-                //     setState({
-                //         dicStationData: newData[key]
-                //     })
-                // }
                 setInterval(() => {
-                    // let newData = JSON.parse(data)
-                    // for(let key in newData) {
-                        // console.log('dit is de key: ' + key)
-                        // console.log('dit zijn de values: ' + newData[key][0])
-                        // setState({
-                        //     dicStationData: newData[key]
-                            // dicStationData.push({
-                            //     dicStationData[key] = newData[key]
-                            // })
-                        // });
-                    // }
-                    //     console.log(state.state.dicStationData)
-                //    only fetch when page is being refreshed?
                 }, 0);
             })
             .catch(err => console.log(err));
@@ -150,24 +117,6 @@ function App() {
 );
 }
 
-function Station (){
-    const stn = '';
-    const date = '';
-    const time = '';
-    const temp = '';
-    const dewp = '';
-    const stp = '';
-    const slp = '';
-    const visib = '';
-    const wdsp = '';
-    const prcp = '';
-    const sndp = '';
-    const frshtt = '';
-    // const cldc = '';
-    const wnddir = '';
-
-}
-
 function PrivateRoute ({component: Component, authed, ...rest}) {
     return (
         <Route
@@ -179,44 +128,37 @@ function PrivateRoute ({component: Component, authed, ...rest}) {
     )
 }
 
-function Navbar(props) {
-    return (
-        <div>
-        <header>
-            hallo
-        </header>
-        </div>
-            // ...
-            // {/*{props.loggedIn ? ... // instead of this.state.loggedIn*/}
-                )
-            }
-
-// You can think of these components as "pages"
-// in your app.
-function Home() {
-    return (
-        <div>
-            <h2>Home</h2>
-        </div>
-    );
-}
-
 function Weather() {
     const history = useHistory();
-    // const stationInfo = data
-    // console.log(props.stn)
-    const stn = ''
-    const data = ''
+    const array1 = []
+    const array2 = []
+    const allValues = Object.values(dicStationData)
 
-    const handleData = (d) => {
-        console.log(d)
-    //     console.log(stationData)
-    //     for(let item in stationData){
-            // stn = item
-            // return <h1>{item}</h1>
-        // }
-        // return <h1>stationData</h1>
+    const addToArray1 = () => {
+        for(let item in allValues){
+            console.log(allValues[item][5])
+            array1.push(allValues[item][5])
+        }
+        array1.sort(function(a, b) {
+            return b - a;
+        });
+
+        array1.length = 10
     }
+
+    const addToArray2 = () => {
+        for(let item in allValues){
+            console.log(allValues[item][6])
+            array2.push(allValues[item][6])
+        }
+
+        array2.sort(function(a, b) {
+             return b - a;
+        });
+
+        array2.length = 10
+    }
+
 
     const handleLogout = () => {
         console.log("logged off")
@@ -232,7 +174,6 @@ function Weather() {
                 <div className="weatherbox">
                     <PerfectScrollbar>
                 <h1>All stations</h1>
-                {/*ook moet er ff een slider voor als het meer worden*/}
 
                 {Object.keys(dicStationData).map((key, i) => (
                     // console.log(key, dicStationData[key]))
@@ -248,17 +189,12 @@ function Weather() {
                     <PerfectScrollbar>
                 <h1>Top ten</h1>
                 <p>station level pressure</p>
-                        {Object.keys(dicStationData).map((key, i) => (
-                            //voor elke key luchtdruk sort
-                            // const sortedList = []
-                            // const airpressure= localStorage.getItem(key).split('')[3]
-                            <div className="item" key={i}>
-                                {localStorage.getItem(key).split(',')[5]}
+                        {addToArray1()}
+                        {array1.map(value => (
+                            <div className="item">
+                                {value}
                             </div>
                         ))}
-                {/*<div className="item">*/}
-                {/*test : test*/}
-                {/*</div>*/}
                         </PerfectScrollbar>
                 </div>
 
@@ -266,39 +202,12 @@ function Weather() {
                     <PerfectScrollbar>
                 <h1>Top ten</h1>
                 <p>sea level pressure</p>
-                        {/*{Object.keys(dicStationData).sort().map((key, i) => (*/}
-                        {/*    <div className="item" key={i}>*/}
-                        {/*        /!*console.log(i)*!/*/}
-                        {/*        {localStorage.getItem(key).split(',')[6]}*/}
-                        {/*    </div>*/}
-                        {/*))}*/}
-
-                        {/*{ let sortable = []*/}
-                        {/*    for(let s in dicStationData) {*/}
-                        {/*        sortable.push([s, dicStationData[s]])*/}
-                        {/*}*/}
-                        {/*}*/}
-
-                        {/*Object.fromEntries(*/}
-                        {/*Object.entries(maxSpeed).sort(([,a],[,b]) => a-b)*/}
-                {/*<div className="item">*/}
-                {/*test : test*/}
-                {/*</div>*/}
-                {/*<div className="item">*/}
-                {/*test : test*/}
-                {/*</div>*/}
-                {/*<div className="item">*/}
-                {/*test : test*/}
-                {/*</div>*/}
-                {/*<div className="item">*/}
-                {/*test : test*/}
-                {/*</div>*/}
-                {/*<div className="item">*/}
-                {/*test : test*/}
-                {/*</div>*/}
-                {/*<div className="item">*/}
-                {/*test : test*/}
-                {/*</div>*/}
+                            {addToArray2()}
+                            {array2.map(value => (
+                                <div className="item">
+                                {value}
+                                </div>
+                            ))}
                         </PerfectScrollbar>
                 </div>
                 </div>
