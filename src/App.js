@@ -1,14 +1,14 @@
-import React, { Component, useState, setState, useEffect }  from 'react'
+import React, { useState, useEffect }  from 'react'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './App.css';
+import 'object-to-xml'
 
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    useHistory,
-    Link
+    useHistory
 } from 'react-router-dom';
 
 const dicStationData = {};
@@ -57,7 +57,8 @@ function Weather() {
     const addDataAllValues = () => {
         for(let key in localStorage){
             if(key.match(/^[0-9]+$/)){
-                allValues.push(localStorage.getItem(key))
+                // allValues.push(localStorage.getItem(key))
+                allValues[key] = localStorage.getItem(key)
             }
         }
     }
@@ -70,6 +71,7 @@ function Weather() {
             return b - a;
         });
         array1.length = 10
+
     }
 
     const addToArray2 = () => {
@@ -88,10 +90,9 @@ function Weather() {
         }
     }
     const handleDownload = () => {
-        console.log("Download button clicked")
-        for(let item in localStorage){
-            console.log(item)
-        }
+        let o2x = require('object-to-xml')
+        let dic_xml = o2x(dicStationData)
+        console.log(dic_xml)
     }
 
     const handleLogout = () => {
@@ -125,7 +126,7 @@ function Weather() {
                         {addToArray1()}
                         {array1.map(value => (
                             <div className="item" key={value}>
-                                <p>{value} </p>
+                                <p>{value}</p>
                             </div>
                         ))}
                     </PerfectScrollbar>
@@ -138,7 +139,7 @@ function Weather() {
                         {addToArray2()}
                         {array2.map(value => (
                             <div className="item" key={value}>
-                                {value}
+                               {value}
                             </div>
                         ))}
                     </PerfectScrollbar>
@@ -151,15 +152,12 @@ function Weather() {
 function Login() {
     const [userName, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [error, setError] = useState("")
     const history = useHistory();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if(userName == 'admin' && password == 'test123'){
             console.log('je bent ingelogd')
-            setIsAuthenticated(true);
             history.push("/Weather")
         } else if(userName == '' || password == '') {
             alert('Fields are required')
